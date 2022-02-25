@@ -17,6 +17,7 @@
 		32BE7FD827C4342E0093CB3E /* TSVBMacTestUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FD727C4342E0093CB3E /* TSVBMacTestUITestsLaunchTests.m */; };
 		32BE7FFA27C701F80093CB3E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32BE7FF927C701F80093CB3E /* AVFoundation.framework */; platformFilter = maccatalyst; };
 		32BE7FFD27C73A640093CB3E /* TSVBReplacer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FFC27C73A640093CB3E /* TSVBReplacer.mm */; };
+		32EB497127C978A700882B17 /* libmcvb.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 32BE800427C73CAC0093CB3E /* libmcvb.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32EB497127C978A700882B17 /* libmcvb.dylib in Resources */,
 				32BE7FBC27C4342E0093CB3E /* Assets.xcassets in Resources */,
 				32BE7FBF27C4342E0093CB3E /* Main.storyboard in Resources */,
 			);
