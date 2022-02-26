@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		326D4F2B27C9BD3C00276E64 /* libmcvb.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 326D4F2427C9A9A300276E64 /* libmcvb.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		32BE7FB727C4342D0093CB3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FB627C4342D0093CB3E /* AppDelegate.m */; };
 		32BE7FBA27C4342D0093CB3E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FB927C4342D0093CB3E /* ViewController.m */; };
 		32BE7FBC27C4342E0093CB3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32BE7FBB27C4342E0093CB3E /* Assets.xcassets */; };
@@ -16,8 +17,8 @@
 		32BE7FD627C4342E0093CB3E /* TSVBMacTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FD527C4342E0093CB3E /* TSVBMacTestUITests.m */; };
 		32BE7FD827C4342E0093CB3E /* TSVBMacTestUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FD727C4342E0093CB3E /* TSVBMacTestUITestsLaunchTests.m */; };
 		32BE7FFA27C701F80093CB3E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32BE7FF927C701F80093CB3E /* AVFoundation.framework */; platformFilter = maccatalyst; };
-		32BE7FFD27C73A640093CB3E /* TSVBReplacer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FFC27C73A640093CB3E /* TSVBReplacer.mm */; };
-		32EB497127C978A700882B17 /* libmcvb.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 32BE800427C73CAC0093CB3E /* libmcvb.dylib */; };
+		32BE7FFD27C73A640093CB3E /* MCVBReplacer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FFC27C73A640093CB3E /* MCVBReplacer.mm */; };
+		32EB497427C9814600882B17 /* BaseVBReplacer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32EB497327C9814600882B17 /* BaseVBReplacer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		326D4F2C27C9BD3C00276E64 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				326D4F2B27C9BD3C00276E64 /* libmcvb.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		326D4F2427C9A9A300276E64 /* libmcvb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmcvb.dylib; sourceTree = "<group>"; };
 		32BE7FB227C4342D0093CB3E /* TSVBMacTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TSVBMacTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32BE7FB527C4342D0093CB3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32BE7FB627C4342D0093CB3E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,14 +70,15 @@
 		32BE7FD727C4342E0093CB3E /* TSVBMacTestUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSVBMacTestUITestsLaunchTests.m; sourceTree = "<group>"; };
 		32BE7FF727C701E70093CB3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		32BE7FF927C701F80093CB3E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		32BE7FFB27C73A640093CB3E /* TSVBReplacer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSVBReplacer.h; sourceTree = "<group>"; };
-		32BE7FFC27C73A640093CB3E /* TSVBReplacer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TSVBReplacer.mm; sourceTree = "<group>"; };
+		32BE7FFB27C73A640093CB3E /* MCVBReplacer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCVBReplacer.h; sourceTree = "<group>"; };
+		32BE7FFC27C73A640093CB3E /* MCVBReplacer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCVBReplacer.mm; sourceTree = "<group>"; };
 		32BE7FFF27C73BAD0093CB3E /* frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frame.h; sourceTree = "<group>"; };
 		32BE800027C73BAD0093CB3E /* sdk_factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdk_factory.h; sourceTree = "<group>"; };
 		32BE800127C73BAD0093CB3E /* irelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = irelease.h; sourceTree = "<group>"; };
 		32BE800227C73BAD0093CB3E /* frame_factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frame_factory.h; sourceTree = "<group>"; };
 		32BE800327C73BAD0093CB3E /* pipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pipeline.h; sourceTree = "<group>"; };
-		32BE800427C73CAC0093CB3E /* libmcvb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmcvb.dylib; path = TSVBMacTest/libmcvb.dylib; sourceTree = "<group>"; };
+		32EB497227C9814600882B17 /* BaseVBReplacer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseVBReplacer.h; sourceTree = "<group>"; };
+		32EB497327C9814600882B17 /* BaseVBReplacer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseVBReplacer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +107,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		326D4F2727C9AB1E00276E64 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		32BE7FA927C4342D0093CB3E = {
 			isa = PBXGroup;
 			children = (
@@ -114,13 +138,16 @@
 		32BE7FB427C4342D0093CB3E /* TSVBMacTest */ = {
 			isa = PBXGroup;
 			children = (
+				326D4F2727C9AB1E00276E64 /* Resources */,
 				32BE7FF727C701E70093CB3E /* Info.plist */,
 				32BE7FB527C4342D0093CB3E /* AppDelegate.h */,
 				32BE7FB627C4342D0093CB3E /* AppDelegate.m */,
 				32BE7FB827C4342D0093CB3E /* ViewController.h */,
 				32BE7FB927C4342D0093CB3E /* ViewController.m */,
-				32BE7FFB27C73A640093CB3E /* TSVBReplacer.h */,
-				32BE7FFC27C73A640093CB3E /* TSVBReplacer.mm */,
+				32EB497227C9814600882B17 /* BaseVBReplacer.h */,
+				32EB497327C9814600882B17 /* BaseVBReplacer.mm */,
+				32BE7FFB27C73A640093CB3E /* MCVBReplacer.h */,
+				32BE7FFC27C73A640093CB3E /* MCVBReplacer.mm */,
 				32BE7FFE27C73B5B0093CB3E /* TSVB */,
 				32BE7FBB27C4342E0093CB3E /* Assets.xcassets */,
 				32BE7FBD27C4342E0093CB3E /* Main.storyboard */,
@@ -150,7 +177,7 @@
 		32BE7FF827C701F80093CB3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				32BE800427C73CAC0093CB3E /* libmcvb.dylib */,
+				326D4F2427C9A9A300276E64 /* libmcvb.dylib */,
 				32BE7FF927C701F80093CB3E /* AVFoundation.framework */,
 			);
 			name = Frameworks;
@@ -178,6 +205,7 @@
 				32BE7FAE27C4342D0093CB3E /* Sources */,
 				32BE7FAF27C4342D0093CB3E /* Frameworks */,
 				32BE7FB027C4342D0093CB3E /* Resources */,
+				326D4F2C27C9BD3C00276E64 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -271,7 +299,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EB497127C978A700882B17 /* libmcvb.dylib in Resources */,
 				32BE7FBC27C4342E0093CB3E /* Assets.xcassets in Resources */,
 				32BE7FBF27C4342E0093CB3E /* Main.storyboard in Resources */,
 			);
@@ -300,8 +327,9 @@
 			files = (
 				32BE7FBA27C4342D0093CB3E /* ViewController.m in Sources */,
 				32BE7FC127C4342E0093CB3E /* main.m in Sources */,
-				32BE7FFD27C73A640093CB3E /* TSVBReplacer.mm in Sources */,
+				32BE7FFD27C73A640093CB3E /* MCVBReplacer.mm in Sources */,
 				32BE7FB727C4342D0093CB3E /* AppDelegate.m in Sources */,
+				32EB497427C9814600882B17 /* BaseVBReplacer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +517,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TSVBMacTest",
+					"$(PROJECT_DIR)",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xchen586.TSVBMacTest;
@@ -521,6 +550,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TSVBMacTest",
+					"$(PROJECT_DIR)",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xchen586.TSVBMacTest;

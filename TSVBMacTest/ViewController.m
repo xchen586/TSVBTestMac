@@ -8,8 +8,11 @@
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+#import "BaseVBReplacer.h"
+#import "MCVBReplacer.h"
+
 @interface ViewController () <AVCaptureVideoDataOutputSampleBufferDelegate> {
-    
+    BaseVBReplacer * _cvReplacer;
 }
 
 @property (nonatomic, weak) IBOutlet NSView *videoPreviewView;
@@ -47,7 +50,14 @@
 }
 
 - (void)initSetup {
+    [self setupReplacer];
     [self setupCaptureSession];
+}
+
+- (void)setupReplacer {
+    if (!_cvReplacer) {
+        _cvReplacer = [[MCVBReplacer alloc] init];
+    }
 }
 
 - (BOOL)setupCaptureSession {

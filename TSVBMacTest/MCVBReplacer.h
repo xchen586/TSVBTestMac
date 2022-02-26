@@ -6,10 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseVBReplacer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSVBReplacer : NSObject
+@interface MCVBReplacer : BaseVBReplacer
 
 @end
 
