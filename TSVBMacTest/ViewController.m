@@ -127,6 +127,9 @@
 
 - (void)windowWillClose:(NSNotification *)notification {
     [_session stopRunning];
+    if (_cvReplacer) {
+        [_cvReplacer releaseFactoryResource];
+    }
 }
 
 - (void) switchSpace {
@@ -150,6 +153,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 }
 
 - (void)captureFrameForVB:(CMSampleBufferRef _Nonnull)sampleBuffer {
-    
+    CMFormatDescriptionRef formatDescription = CMSampleBufferGetFormatDescription( sampleBuffer );
+    CVPixelBufferRef sourceBuffer = CMSampleBufferGetImageBuffer( sampleBuffer );
+    CVPixelBufferRef pixelBufferBeforeRunOn = nil;
+    if (_cvReplacer) {
+        pixelBufferBeforeRunOn = [_cvReplacer processPixelBuffer:sourceBuffer];
+    } else {
+        
+    }
 }
 @end

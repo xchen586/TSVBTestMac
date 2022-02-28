@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setBackgroundWithContentOfFile:(nullable NSString*)filePath;
 -(void)resetBackgroundImage;
 
+-(void)releaseFactoryResource;
+
 @end
 
 NS_ASSUME_NONNULL_END

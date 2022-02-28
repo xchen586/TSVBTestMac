@@ -528,6 +528,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/TSVBMacTest/Libraries",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xchen586.TSVBMacTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -562,6 +563,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/TSVBMacTest/Libraries",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xchen586.TSVBMacTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
