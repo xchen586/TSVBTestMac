@@ -10,9 +10,11 @@
 
 #import "BaseVBReplacer.h"
 #import "MCVBReplacer.h"
+#import "MCMtlPixelBufferView.h"
 
 @interface ViewController () <AVCaptureVideoDataOutputSampleBufferDelegate> {
     BaseVBReplacer * _cvReplacer;
+    MCMtlPixelBufferView * _mtlView;
 }
 
 @property (nonatomic, weak) IBOutlet NSView *videoPreviewView;
@@ -162,4 +164,5 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
     }
 }
+
 @end
