@@ -71,7 +71,7 @@
 }
 
 - (void)initSetup {
-    //[self createMtlView];
+    [self createMtlView];
     _enableVB = YES;
     [self setupReplacer];
     [self setupCaptureSession];
@@ -247,30 +247,41 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     });
 }
 
+- (void)outputAsCGImageToLayer:(CVPixelBufferRef)pixelBufferBeforeRunOn {
+    if (self->_outputLayer) {
+        self->_outputLayer.hidden = NO;
+        CGImageRef cgOutput = [self getCGImageFromCVPixelBuffer:pixelBufferBeforeRunOn];
+        if (cgOutput) {
+            self->_outputLayer.contents = (__bridge id)(cgOutput);
+            CGImageRelease(cgOutput);
+            cgOutput = nil;
+        }
+        
+        CFRelease(pixelBufferBeforeRunOn);
+    }
+}
+
+- (void)outputAsPixelBufferToMtlView:(CVPixelBufferRef)pixelBufferBeforeRunOn {
+    if (self->_mtlView) {
+        [self->_mtlView displayVideoPixelBuffer:pixelBufferBeforeRunOn];
+        //[self->_mtlView flushPixelBufferCache];
+        //CFRelease(pixelBufferBeforeRunOn);
+    }
+}
+
 - (void)captureFrameForVB:(CMSampleBufferRef _Nonnull)sampleBuffer {
     //CMFormatDescriptionRef formatDescription = CMSampleBufferGetFormatDescription( sampleBuffer );
     CVPixelBufferRef sourceBuffer = CMSampleBufferGetImageBuffer( sampleBuffer );
 
     CVPixelBufferRef pixelBufferBeforeRunOn = nil;
     if (_cvReplacer && _enableVB) {
-        _outputLayer.hidden = NO;
+        
         pixelBufferBeforeRunOn = [_cvReplacer processPixelBuffer:sourceBuffer];
         if (pixelBufferBeforeRunOn) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                //[_mtlView displayVideoPixelBuffer:pixelBufferBeforeRunOn];
-                //[_mtlView flushPixelBufferCache];
 
-                if (self->_outputLayer) {
-
-                    CGImageRef cgOutput = [self getCGImageFromCVPixelBuffer:pixelBufferBeforeRunOn];
-                    if (cgOutput) {
-                        self->_outputLayer.contents = (__bridge id)(cgOutput);
-                        CGImageRelease(cgOutput);
-                        cgOutput = nil;
-                    }
-
-                    CFRelease(pixelBufferBeforeRunOn);
-                }
+                [self outputAsCGImageToLayer:pixelBufferBeforeRunOn];
+                //[self outputAsPixelBufferToMtlView:pixelBufferBeforeRunOn];
                 
             });
             

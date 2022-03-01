@@ -19,11 +19,8 @@
     // Insert code here to initialize your application
     NSWindow * window = [NSApplication sharedApplication].orderedWindows.firstObject;
     if (window) {
-        ViewController * viewController = (ViewController *)window.contentViewController;
-        if (viewController) {
-            CGRect rect = CGRectMake(0, 0, 1280, 720);
-            viewController.view.frame = rect;
-        }
+        NSSize size = NSMakeSize(1280, 720);
+        [window setContentSize:size];
     }
     
 }
