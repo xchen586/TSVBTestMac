@@ -119,6 +119,16 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="TestVB" id="Af1-3a-kAf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="TestVB" id="dnE-an-PAb">
+                                    <items>
+                                        <menuItem title="Enable Virtual Background" id="MQf-Hu-ZHf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Edit" id="5QF-Oa-p0T">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Edit" id="W48-6f-4Dl">

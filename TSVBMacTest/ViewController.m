@@ -22,7 +22,10 @@
     AAPLRenderer *_renderer;
     
     CALayer * _outputLayer;
+    
+    BOOL _enableVB;
 }
+
 
 @property (nonatomic, weak) IBOutlet NSView *videoPreviewView;
 
@@ -60,6 +63,7 @@
 
 - (void)initSetup {
     //[self createMtlView];
+    _enableVB = YES;
     [self setupReplacer];
     [self setupCaptureSession];
     [self setupOutputLayer];
@@ -119,6 +123,7 @@
         _outputLayer.borderWidth = 1.0;
         _outputLayer.borderColor = [NSColor whiteColor].CGColor;
         _outputLayer.backgroundColor = [NSColor blackColor].CGColor;
+        _outputLayer.hidden = YES;
 
         [_videoPreviewView.layer addSublayer:_outputLayer];
     }
@@ -236,7 +241,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     CVPixelBufferRef sourceBuffer = CMSampleBufferGetImageBuffer( sampleBuffer );
 
     CVPixelBufferRef pixelBufferBeforeRunOn = nil;
-    if (_cvReplacer) {
+    if (_cvReplacer && _enableVB) {
+        _outputLayer.hidden = NO;
         pixelBufferBeforeRunOn = [_cvReplacer processPixelBuffer:sourceBuffer];
         if (pixelBufferBeforeRunOn) {
             //dispatch_async(dispatch_get_main_queue(), ^{
@@ -259,7 +265,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
         }
     } else {
-        
+        _outputLayer.hidden = YES;
     }
 
 
