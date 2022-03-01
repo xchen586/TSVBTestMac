@@ -256,7 +256,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         _outputLayer.hidden = NO;
         pixelBufferBeforeRunOn = [_cvReplacer processPixelBuffer:sourceBuffer];
         if (pixelBufferBeforeRunOn) {
-            //dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 //[_mtlView displayVideoPixelBuffer:pixelBufferBeforeRunOn];
                 //[_mtlView flushPixelBufferCache];
 
@@ -272,7 +272,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     CFRelease(pixelBufferBeforeRunOn);
                 }
                 
-            //});
+            });
             
         }
     } else {
