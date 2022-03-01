@@ -9,6 +9,8 @@
 
 @interface ViewController : NSViewController
 
+- (void)changeVBOption;
+- (BOOL)getVBOption;
 
 @end
 

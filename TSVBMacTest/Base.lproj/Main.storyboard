@@ -123,8 +123,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="TestVB" id="dnE-an-PAb">
                                     <items>
-                                        <menuItem title="Enable Virtual Background" id="MQf-Hu-ZHf">
+                                        <menuItem title="Disable Virtual Background" id="MQf-Hu-ZHf">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="enableVBOption:" target="Voe-Tx-rLC" id="fMZ-h8-qko"/>
+                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>

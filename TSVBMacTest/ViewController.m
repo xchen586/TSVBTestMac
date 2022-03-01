@@ -50,6 +50,15 @@
     // Update the view, if already loaded.
 }
 
+- (void)changeVBOption {
+    BOOL oldValue = _enableVB;
+    _enableVB = !oldValue;
+}
+
+- (BOOL)getVBOption {
+    return _enableVB;
+}
+
 - (void) awakeFromNib {
     [super awakeFromNib];
     
@@ -123,8 +132,10 @@
         _outputLayer.borderWidth = 1.0;
         _outputLayer.borderColor = [NSColor whiteColor].CGColor;
         _outputLayer.backgroundColor = [NSColor blackColor].CGColor;
+        //_outputLayer.affineTransform = CGAffineTransformMakeScale (-1,1);
         _outputLayer.hidden = YES;
-
+        
+        
         [_videoPreviewView.layer addSublayer:_outputLayer];
     }
 }
@@ -185,7 +196,7 @@
     _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     _previewLayer.frame = CGRectMake (0, 0, _videoPreviewView.frame.size.width, _videoPreviewView.frame.size.height);
     
-    _previewLayer.affineTransform = CGAffineTransformMakeScale (-1,1);
+    //_previewLayer.affineTransform = CGAffineTransformMakeScale (-1,1);
     
     [_videoPreviewView setWantsLayer:YES];
     [_videoPreviewView.layer addSublayer:_previewLayer];
