@@ -7,14 +7,21 @@
 
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import <VideoToolbox/VideoToolbox.h>
 
 #import "BaseVBReplacer.h"
 #import "MCVBReplacer.h"
 #import "MCMtlPixelBufferView.h"
+#import "AAPLRenderer.h"
 
 @interface ViewController () <AVCaptureVideoDataOutputSampleBufferDelegate> {
     BaseVBReplacer * _cvReplacer;
     MCMtlPixelBufferView * _mtlView;
+    
+    MTKView * _mtkView;
+    AAPLRenderer *_renderer;
+    
+    CALayer * _outputLayer;
 }
 
 @property (nonatomic, weak) IBOutlet NSView *videoPreviewView;
@@ -52,8 +59,69 @@
 }
 
 - (void)initSetup {
+    //[self createMtlView];
     [self setupReplacer];
     [self setupCaptureSession];
+    [self setupOutputLayer];
+}
+
+- (void)viewWillLayout {
+    [super viewWillLayout];
+    [self layoutMtlView];
+}
+
+- (void)viewDidLayout {
+    [super viewDidLayout];
+    [self layoutMtlView];
+    
+}
+
+- (void)layoutMtlView {
+    if (_mtlView) {
+        _mtlView.frame = [self getMetalViewRect];
+    }
+}
+
+- (void)layoutMtkView {
+    if (_mtkView) {
+        _mtkView.frame = [self getMetalViewRect];
+    }
+}
+
+- (CGRect)getMetalViewRect {
+    CGRect frame = _videoPreviewView.frame;
+    CGRect ret = CGRectMake(frame.origin.x, frame.origin.y / 2.0, frame.size.width / 2.0, frame.size.height / 2.0);
+    return ret;
+    
+}
+- (void)createMtlView {
+    if (!_mtlView) {
+        _mtlView = [[MCMtlPixelBufferView alloc] initWithFrame:CGRectZero];
+        [self.view addSubview:_mtlView];
+        NSWindowOrderingMode mode = NSWindowAbove;
+        [self.view addSubview:_mtlView positioned:mode relativeTo:_videoPreviewView];
+    }
+}
+
+- (void)createMtkView {
+    if (_mtkView) {
+        _mtkView = [[MTKView alloc] initWithFrame:CGRectZero];
+    }
+}
+
+- (void)setupOutputLayer
+{
+    if (!_outputLayer) {
+        _outputLayer = [CALayer layer];
+        _outputLayer.bounds = CGRectMake(0, 0, 640, 360);
+        _outputLayer.position = CGPointMake(0, 0);
+        _outputLayer.anchorPoint = CGPointMake(0, 0);
+        _outputLayer.borderWidth = 1.0;
+        _outputLayer.borderColor = [NSColor whiteColor].CGColor;
+        _outputLayer.backgroundColor = [NSColor blackColor].CGColor;
+
+        [_videoPreviewView.layer addSublayer:_outputLayer];
+    }
 }
 
 - (void)setupReplacer {
@@ -63,6 +131,10 @@
 }
 
 - (BOOL)setupCaptureSession {
+    
+    if (_session) {
+        return YES;
+    }
     
     NSError *error = nil;
     _session = [[AVCaptureSession alloc] init];
@@ -86,8 +158,6 @@
         return NO;
     }
     [_session addInput:input];
-    
-    
     
     AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
     if (!output) {
@@ -114,6 +184,13 @@
     
     [_videoPreviewView setWantsLayer:YES];
     [_videoPreviewView.layer addSublayer:_previewLayer];
+#if 0
+    _outputLayer = [[CALayer alloc] init];
+    _outputLayer.name = @"vbOutput";
+    _outputLayer.frame = CGRectMake (0, 0, _videoPreviewView.frame.size.width, _videoPreviewView.frame.size.height);
+    _outputLayer.affineTransform = CGAffineTransformMakeScale (-1,1);
+    [_videoPreviewView.layer addSublayer:_outputLayer];
+#endif
     
     [_session setSessionPreset:AVCaptureSessionPresetMedium];
     
@@ -155,14 +232,47 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 }
 
 - (void)captureFrameForVB:(CMSampleBufferRef _Nonnull)sampleBuffer {
-    CMFormatDescriptionRef formatDescription = CMSampleBufferGetFormatDescription( sampleBuffer );
+    //CMFormatDescriptionRef formatDescription = CMSampleBufferGetFormatDescription( sampleBuffer );
     CVPixelBufferRef sourceBuffer = CMSampleBufferGetImageBuffer( sampleBuffer );
+
     CVPixelBufferRef pixelBufferBeforeRunOn = nil;
     if (_cvReplacer) {
         pixelBufferBeforeRunOn = [_cvReplacer processPixelBuffer:sourceBuffer];
+        if (pixelBufferBeforeRunOn) {
+            //dispatch_async(dispatch_get_main_queue(), ^{
+                //[_mtlView displayVideoPixelBuffer:pixelBufferBeforeRunOn];
+                //[_mtlView flushPixelBufferCache];
+
+                if (self->_outputLayer) {
+
+                    CGImageRef cgOutput = [self getCGImageFromCVPixelBuffer:pixelBufferBeforeRunOn];
+                    if (cgOutput) {
+                        self->_outputLayer.contents = (__bridge id)(cgOutput);
+                        CGImageRelease(cgOutput);
+                        cgOutput = nil;
+                    }
+
+                    CFRelease(pixelBufferBeforeRunOn);
+                }
+                
+            //});
+            
+        }
     } else {
         
     }
+
+
+}
+
+- (CGImageRef)getCGImageFromCVPixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    if (!pixelBuffer) {
+        return NULL;
+    }
+    CGImageRef ret;
+    
+    OSStatus err = VTCreateCGImageFromCVPixelBuffer(pixelBuffer, nil, &ret);
+    return ret;
 }
 
 @end

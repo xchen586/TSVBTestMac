@@ -12,6 +12,11 @@
 		3286470327CD5DB20055E449 /* MCMtlRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = 3286470227CD5DB20055E449 /* MCMtlRendering.m */; };
 		3286470627CD612D0055E449 /* MCAppResolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 3286470527CD612D0055E449 /* MCAppResolution.m */; };
 		3286470B27CD69B40055E449 /* Renderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3286470A27CD69B40055E449 /* Renderer.metal */; };
+		3286470D27CD720A0055E449 /* PassThrough.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3286470C27CD720A0055E449 /* PassThrough.metal */; };
+		3286471227CD79420055E449 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3286471027CD79420055E449 /* AAPLShaders.metal */; };
+		3286471727CD79530055E449 /* AAPLImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3286471327CD79520055E449 /* AAPLImage.m */; };
+		3286471827CD79530055E449 /* AAPLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3286471627CD79520055E449 /* AAPLRenderer.m */; };
+		3286471A27CD7A2E0055E449 /* Image.tga in Resources */ = {isa = PBXBuildFile; fileRef = 3286471927CD7A2E0055E449 /* Image.tga */; };
 		32BE7FB727C4342D0093CB3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FB627C4342D0093CB3E /* AppDelegate.m */; };
 		32BE7FBA27C4342D0093CB3E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BE7FB927C4342D0093CB3E /* ViewController.m */; };
 		32BE7FBC27C4342E0093CB3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32BE7FBB27C4342E0093CB3E /* Assets.xcassets */; };
@@ -66,6 +71,14 @@
 		3286470827CD693A0055E449 /* ShadersType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadersType.h; sourceTree = "<group>"; };
 		3286470927CD69850055E449 /* SharedShadersType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedShadersType.h; sourceTree = "<group>"; };
 		3286470A27CD69B40055E449 /* Renderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Renderer.metal; sourceTree = "<group>"; };
+		3286470C27CD720A0055E449 /* PassThrough.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PassThrough.metal; sourceTree = "<group>"; };
+		3286471027CD79420055E449 /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = AAPLShaders.metal; sourceTree = "<group>"; };
+		3286471127CD79420055E449 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
+		3286471327CD79520055E449 /* AAPLImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLImage.m; sourceTree = "<group>"; };
+		3286471427CD79520055E449 /* AAPLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLRenderer.h; sourceTree = "<group>"; };
+		3286471527CD79520055E449 /* AAPLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLImage.h; sourceTree = "<group>"; };
+		3286471627CD79520055E449 /* AAPLRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLRenderer.m; sourceTree = "<group>"; };
+		3286471927CD7A2E0055E449 /* Image.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Image.tga; sourceTree = "<group>"; };
 		32BE7FB227C4342D0093CB3E /* TSVBMacTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TSVBMacTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32BE7FB527C4342D0093CB3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32BE7FB627C4342D0093CB3E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -122,6 +135,7 @@
 		326D4F2727C9AB1E00276E64 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3286471927CD7A2E0055E449 /* Image.tga */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -134,7 +148,7 @@
 			path = Libraries;
 			sourceTree = "<group>";
 		};
-		328646FD27CD59C00055E449 /* Metal */ = {
+		328646FD27CD59C00055E449 /* MCMetal */ = {
 			isa = PBXGroup;
 			children = (
 				3286470727CD68C10055E449 /* shaders */,
@@ -143,7 +157,7 @@
 				3286470127CD5DB20055E449 /* MCMtlRendering.h */,
 				3286470227CD5DB20055E449 /* MCMtlRendering.m */,
 			);
-			path = Metal;
+			path = MCMetal;
 			sourceTree = "<group>";
 		};
 		3286470727CD68C10055E449 /* shaders */ = {
@@ -152,6 +166,28 @@
 				3286470827CD693A0055E449 /* ShadersType.h */,
 				3286470927CD69850055E449 /* SharedShadersType.h */,
 				3286470A27CD69B40055E449 /* Renderer.metal */,
+				3286470C27CD720A0055E449 /* PassThrough.metal */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		3286470E27CD77E10055E449 /* AAMetal */ = {
+			isa = PBXGroup;
+			children = (
+				3286471527CD79520055E449 /* AAPLImage.h */,
+				3286471327CD79520055E449 /* AAPLImage.m */,
+				3286471427CD79520055E449 /* AAPLRenderer.h */,
+				3286471627CD79520055E449 /* AAPLRenderer.m */,
+				3286470F27CD78100055E449 /* shaders */,
+			);
+			path = AAMetal;
+			sourceTree = "<group>";
+		};
+		3286470F27CD78100055E449 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				3286471027CD79420055E449 /* AAPLShaders.metal */,
+				3286471127CD79420055E449 /* AAPLShaderTypes.h */,
 			);
 			path = shaders;
 			sourceTree = "<group>";
@@ -193,7 +229,8 @@
 				32BE7FFC27C73A640093CB3E /* MCVBReplacer.mm */,
 				3286470427CD612D0055E449 /* MCAppResolution.h */,
 				3286470527CD612D0055E449 /* MCAppResolution.m */,
-				328646FD27CD59C00055E449 /* Metal */,
+				3286470E27CD77E10055E449 /* AAMetal */,
+				328646FD27CD59C00055E449 /* MCMetal */,
 				32BE7FFE27C73B5B0093CB3E /* TSVB */,
 				32BE7FBB27C4342E0093CB3E /* Assets.xcassets */,
 				32BE7FBD27C4342E0093CB3E /* Main.storyboard */,
@@ -346,6 +383,7 @@
 			files = (
 				326D4F3627CAF3B500276E64 /* libmcvb.dylib in Resources */,
 				32BE7FBC27C4342E0093CB3E /* Assets.xcassets in Resources */,
+				3286471A27CD7A2E0055E449 /* Image.tga in Resources */,
 				32BE7FBF27C4342E0093CB3E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,13 +410,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				32BE7FBA27C4342D0093CB3E /* ViewController.m in Sources */,
+				3286471827CD79530055E449 /* AAPLRenderer.m in Sources */,
 				3286470627CD612D0055E449 /* MCAppResolution.m in Sources */,
 				32BE7FC127C4342E0093CB3E /* main.m in Sources */,
 				32BE7FFD27C73A640093CB3E /* MCVBReplacer.mm in Sources */,
 				3286470027CD5A090055E449 /* MCMtlPixelBufferView.m in Sources */,
+				3286471227CD79420055E449 /* AAPLShaders.metal in Sources */,
 				32BE7FB727C4342D0093CB3E /* AppDelegate.m in Sources */,
+				3286471727CD79530055E449 /* AAPLImage.m in Sources */,
 				32EB497427C9814600882B17 /* BaseVBReplacer.mm in Sources */,
 				3286470327CD5DB20055E449 /* MCMtlRendering.m in Sources */,
+				3286470D27CD720A0055E449 /* PassThrough.metal in Sources */,
 				3286470B27CD69B40055E449 /* Renderer.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

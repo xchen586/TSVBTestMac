@@ -92,10 +92,10 @@ using namespace manycam;
         return NO;
     }
     
-//    if (_sdkFactory) {
-//        _sdkFactory->release();
-//        _sdkFactory = nullptr;
-//    }
+    if (_sdkFactory) {
+        _sdkFactory->release();
+        _sdkFactory = nullptr;
+    }
     _pipeline->enableBlurBackground(0.8);
     
     return YES;
@@ -204,7 +204,7 @@ using namespace manycam;
     }
     
     void * data = (void *)(srcAddress);
-    IFrame * input = _frameFactory->createBGRA(data, bytesPerLine, width, height, true);
+    IFrame * input = _frameFactory->createBGRA(data, bytesPerLine, width, height, false);
     
     if (!input) {
         CVPixelBufferUnlockBaseAddress(srcPixelBuffer, 0);
@@ -215,13 +215,19 @@ using namespace manycam;
     PipelineError err;
     //id<MCVBFrame> processed = [_pipeline process:input error:&err];
     IFrame * processed = _pipeline->process(input, &err);
+    if (input) {
+        input->release();
+    }
     if (!processed) {
         return nullptr;
     }
     
-    BOOL copy = YES;
+    BOOL copy = NO;
     CVPixelBufferRef ret = nil;
     ret = [self getPixelBufferFromFrame:processed byCopy:copy];
+    if (processed) {
+        processed->release();
+    }
     
     return ret;
 }
@@ -245,10 +251,12 @@ using namespace manycam;
         
         void * dataPointer = frameData->dataPointer(0);
         if (!dataPointer) {
+            frameData->release();
             return nil;
         }
         uint8_t * rawDataBaseAddress = (uint8_t *)(dataPointer);
         if (!rawDataBaseAddress) {
+            frameData->release();
             return nil;
         }
     
@@ -268,6 +276,7 @@ using namespace manycam;
                                       &ret);
             if (err) {
                 NSLog(@"Error CVPixelBufferCreate creating pixel buffer: %d", err);
+                frameData->release();
                 return nil;
             }
             CVPixelBufferLockBaseAddress(ret,0);
@@ -291,17 +300,19 @@ using namespace manycam;
                                                 &ret);
             if (err) {
                 NSLog(@"Error CVPixelBufferCreateWithBytes creating pixel buffer: %d", err);
+                frameData->release();
                 return nil;
             }
         }
-        
+        frameData->release();
         return ret;
     //}
 }
 
 - (CFDictionaryRef)createVirtualBackgroundPixelBufferAttributes {
     
-    NSDictionary * myAttr = @{ (NSString*)kCVPixelBufferIOSurfacePropertiesKey : @{},
+    NSDictionary * myAttr = @{ (NSString*)kCVPixelBufferIOSurfacePropertiesKey : @YES,
+                               (NSString*)kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey : @YES,
                               (NSString*)kCVPixelBufferMetalCompatibilityKey: @YES,
                               (NSString*)kCVPixelBufferOpenGLTextureCacheCompatibilityKey: @YES
                               

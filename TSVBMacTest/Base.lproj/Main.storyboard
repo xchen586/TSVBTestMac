@@ -710,8 +710,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="720" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="5VY-T3-dfQ">
-                                <rect key="frame" x="0.0" y="0.0" width="720" height="480"/>
+                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5VY-T3-dfQ">
+                                <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
                             </customView>
                         </subviews>
                         <constraints>
