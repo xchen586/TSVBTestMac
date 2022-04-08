@@ -61,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		322DA5742800A36B00BF995B /* pipeline_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pipeline_config.h; sourceTree = "<group>"; };
 		326D4F3227CAF34600276E64 /* libmcvb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmcvb.dylib; sourceTree = "<group>"; };
 		328646FE27CD5A090055E449 /* MCMtlPixelBufferView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMtlPixelBufferView.h; sourceTree = "<group>"; };
 		328646FF27CD5A090055E449 /* MCMtlPixelBufferView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCMtlPixelBufferView.m; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 		32BE7FFE27C73B5B0093CB3E /* TSVB */ = {
 			isa = PBXGroup;
 			children = (
+				322DA5742800A36B00BF995B /* pipeline_config.h */,
 				32BE800227C73BAD0093CB3E /* frame_factory.h */,
 				32BE7FFF27C73BAD0093CB3E /* frame.h */,
 				32BE800127C73BAD0093CB3E /* irelease.h */,
