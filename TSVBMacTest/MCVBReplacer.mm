@@ -96,6 +96,24 @@ using namespace manycam;
         _sdkFactory->release();
         _sdkFactory = nullptr;
     }
+    
+    PipelineError err = PipelineErrorCode::ok;
+    
+    IPipelineConfiguration * config = _pipeline->copyConfiguration();
+    IPipelineConfiguration * defaultConfig = _pipeline->copyDefaultConfiguration();
+    if (!config) {
+        NSLog(@"Fail to copy configuration!");
+        return NO;
+    }
+    if (config->getBackend() != Backend::GPU) {
+        config->setBackend(Backend::GPU);
+        err = _pipeline->setConfiguration(config);
+        if (err != PipelineErrorCode::ok) {
+            NSLog(@"Fail to set configuration!");
+            return NO;
+        }
+    }
+
     _pipeline->enableBlurBackground(0.8);
     
     return YES;
